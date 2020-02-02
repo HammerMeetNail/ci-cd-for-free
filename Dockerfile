@@ -1,4 +1,4 @@
-FROM golang:1.13.7-alpine AS Test
+FROM golang:1.13.7 AS Test
 
 WORKDIR /go/src/app
 COPY . /go/src/app
