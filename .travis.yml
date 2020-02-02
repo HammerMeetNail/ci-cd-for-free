@@ -9,9 +9,9 @@ jobs:
       if: (tag IS NOT present)
       script:
       - docker build --target Test --tag $TRAVIS_REPO_SLUG:$TRAVIS_BUILD_ID .
-      - docker run --rm $TRAVIS_REPO_SLUG:$TRAVIS_BUILD_ID goveralls -coverprofile=coverage.out -service=travis-ci -repotoken $COVERALLS_TOKEN || travis_terminate 1;
+      - docker run --rm "{$TRAVIS_REPO_SLUG,,}":$TRAVIS_BUILD_ID goveralls -coverprofile=coverage.out -service=travis-ci -repotoken $COVERALLS_TOKEN || travis_terminate 1;
     - stage: Release
       if: (tag =~ /(\d+\.){2}\d+/)
       script: 
       - docker build --target Release --tag $TRAVIS_REPO_SLUG:$TRAVIS_TAG . || travis_terminate 1;
-      - docker push $TRAVIS_REPO_SLUG:$TRAVIS_TAG
+      - docker push "{$TRAVIS_REPO_SLUG,,}":$TRAVIS_TAG
