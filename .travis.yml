@@ -13,5 +13,5 @@ jobs:
     - stage: Release
       if: (tag =~ /(\d+\.){2}\d+/)
       script: 
-      - docker build --target Release --tag $TRAVIS_REPO_SLUG:$TRAVIS_TAG . || travis_terminate 1;
+      - docker build --target Release --tag "${TRAVIS_REPO_SLUG,,}":$TRAVIS_TAG . || travis_terminate 1;
       - docker push "${TRAVIS_REPO_SLUG,,}":$TRAVIS_TAG
