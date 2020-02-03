@@ -14,5 +14,5 @@ jobs:
       if: (tag =~ /(\d+\.){2}\d+/)
       script: 
       - docker login -u $DOCKER_USER -p $DOCKER_PASS
-      - docker build --target Release --tag "${TRAVIS_REPO_SLUG,,}":$TRAVIS_TAG . || travis_terminate 1;
+      - docker build --target Deploy --tag "${TRAVIS_REPO_SLUG,,}":$TRAVIS_TAG . || travis_terminate 1;
       - docker push "${TRAVIS_REPO_SLUG,,}":$TRAVIS_TAG
